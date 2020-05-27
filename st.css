@@ -1,0 +1,127 @@
+::before,
+::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+}
+:root {
+  --size: 100px;
+  --marK: calc(var(--size) * 0.9);
+}
+.board {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  grid-template-columns: repeat(3, auto);
+}
+.cell {
+  height: var(--size);
+  width: var(--size);
+  position: relative;
+  border: 1px solid firebrick;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cell:first-child,
+.cell:nth-child(2),
+.cell:nth-child(3) {
+  border-top: none;
+}
+.cell:last-child,
+.cell:nth-child(7),
+.cell:nth-child(8) {
+  border-bottom: none;
+}
+.cell:nth-child(3n + 1) {
+  border-left: none;
+}
+.cell:nth-child(3n + 3) {
+  border-right: none;
+}
+.cell.x,
+.cell.o {
+  cursor: not-allowed;
+}
+.cell.x::before,
+.cell.x::after,
+.cell.o::before {
+  background: forestgreen;
+}
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after,
+.board.o .cell:not(.x):not(.o):hover::before {
+  background: grey;
+  opacity: 0.6;
+}
+
+.cell.x::before,
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::before,
+.board.x .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  height: var(--marK);
+  width: calc(var(--marK) * 0.15);
+}
+.cell.x::before,
+.board.x .cell:not(.x):not(.o):hover::before {
+  transform: rotate(45deg);
+}
+.cell.x::after,
+.board.x .cell:not(.x):not(.o):hover::after {
+  transform: rotate(-45deg);
+}
+.cell.o::before,
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::before,
+.board.o .cell:not(.x):not(.o):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+.cell.o::before,
+.board.o .cell:not(.x):not(.o):hover::before {
+  height: var(--marK);
+  width: var(--marK);
+}
+.cell.o::after,
+.board.o .cell:not(.x):not(.o):hover::after {
+  height: calc(var(--marK) * 0.8);
+  width: calc(var(--marK) * 0.8);
+  background: white;
+}
+.win {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  display: none;
+  color: aquamarine;
+}
+button {
+  font-size: 2rem;
+  background: yellowgreen;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  cursor: pointer;
+  color: blue;
+}
+button:hover {
+  background: sandybrown;
+  color: aqua;
+}
+.win.so {
+  display: flex;
+}
